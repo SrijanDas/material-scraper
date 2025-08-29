@@ -1,4 +1,4 @@
-from src.material_scraper.scraper import CastoramaScraper
+from src.scraper import CastoramaScraper
 
 
 def run_requests_scraper():
