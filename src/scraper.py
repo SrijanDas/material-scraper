@@ -6,6 +6,7 @@ import re
 import random
 from urllib.parse import urljoin, urlparse
 from typing import List, Dict, Optional
+from .config import categories
 
 
 class CastoramaScraper:
@@ -23,15 +24,6 @@ class CastoramaScraper:
         ]
 
         self._setup_session()
-
-        self.search_terms = [
-            'carrelage',  # tiles in French
-            'evier',      # sinks in French
-            'toilettes',  # toilets in French
-            'peinture',   # paint in French
-            'meuble vasque',  # vanities in French
-            'douche'      # showers in French
-        ]
 
         # Add delays between requests
         self.min_delay = 2
@@ -390,7 +382,7 @@ class CastoramaScraper:
         all_products = []
         products_per_category = 100
 
-        for category in self.search_terms:
+        for category in categories:
             print(f"\nScraping category: {category}")
             products = self.scrape_product_list(
                 category, products_per_category)
@@ -399,7 +391,7 @@ class CastoramaScraper:
 
             # Longer delay between categories to avoid being blocked
             # Don't sleep after last category
-            if category != self.search_terms[-1]:
+            if category != categories[-1]:
                 delay = random.uniform(10, 20)
                 print(
                     f"Sleeping for {delay:.1f} seconds before next category...")
@@ -410,9 +402,9 @@ class CastoramaScraper:
     def scrape_search_terms(self) -> List[Dict]:
         """Scrape using search terms instead of category URLs"""
         all_products = []
-        products_per_term = 100 // len(self.search_terms)
+        products_per_term = 100 // len(categories)
 
-        for category_name, search_term in self.search_terms.items():
+        for category_name, search_term in categories:
             print(f"\nSearching for: {category_name} (term: {search_term})")
             search_url = f"/search?term={search_term}"
             products = self.scrape_product_list(

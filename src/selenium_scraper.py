@@ -15,6 +15,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import json
 from bs4 import BeautifulSoup
 from . import CastoramaScraper
+from .config import categories
 
 
 class CastoramaSeleniumScraper:
@@ -23,14 +24,7 @@ class CastoramaSeleniumScraper:
         self.headless = headless
         self.driver = None
 
-        self.search_terms = [
-            'carrelage',  # tiles in French
-            'evier',      # sinks in French
-            'toilettes',  # toilets in French
-            'peinture',   # paint in French
-            'meuble vasque',  # vanities in French
-            'douche'      # showers in French
-        ]
+        self.search_terms = categories
 
     def _setup_driver(self):
         """Setup Chrome WebDriver with anti-detection options"""

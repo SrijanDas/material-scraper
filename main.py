@@ -23,7 +23,7 @@ def run_selenium_scraper():
         scraper.close()
 
         if products:
-            scraper.save_to_json(products, "castorama_products_selenium.json")
+            scraper.save_to_json(products, "products_selenium.json")
             return products
     except ImportError:
         print("Selenium not available. Install with: pip install selenium")
