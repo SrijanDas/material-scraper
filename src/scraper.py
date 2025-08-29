@@ -122,7 +122,7 @@ class CastoramaScraper:
 
                 # Try to detect encoding issues or anti-bot pages
                 try:
-                    soup = BeautifulSoup(response.content, 'lxml')
+                    soup = BeautifulSoup(response.content, 'html')
 
                     # Check for common anti-bot indicators
                     title = soup.find('title')

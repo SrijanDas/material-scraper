@@ -1,4 +1,5 @@
 from src.scraper import CastoramaScraper
+from src.selenium_scraper import CastoramaSeleniumScraper
 
 
 def run_requests_scraper():
@@ -16,7 +17,6 @@ def run_requests_scraper():
 def run_selenium_scraper():
     """Fallback to Selenium if requests fails"""
     try:
-        from material_scraper.selenium_scraper import CastoramaSeleniumScraper
         print("Starting Castorama scraper using Selenium...")
         scraper = CastoramaSeleniumScraper(headless=True)
         products = scraper.scrape_all_categories()
@@ -38,7 +38,7 @@ def main():
     print("Material Scraper for Donizo")
     print("=" * 50)
 
-    products = run_requests_scraper()
+    products = run_selenium_scraper()
 
     if products:
         categories = {}
